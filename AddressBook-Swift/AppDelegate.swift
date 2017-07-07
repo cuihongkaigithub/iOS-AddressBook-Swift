@@ -16,6 +16,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let nav : UINavigationController = self.window?.rootViewController as! UINavigationController
+        
+        let rootVC : ViewController = nav.topViewController as! ViewController
+        
+        var arrM : [Person] = Array.init()
+        let familyNames : [String] = ChineseFamilyName.getFamilyNames()
+        let names : [String] = ChineseFamilyName.getNames()
+        
+        
+        for familyName in familyNames {
+            for name in names {
+                let fullname = familyName + name
+                let person = Person.init()
+                person.name = fullname
+                arrM.append(person)
+            }
+        }
+        
+        rootVC.persons = arrM
+        
         return true
     }
 
